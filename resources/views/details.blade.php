@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -40,17 +41,107 @@
             </div>
         </div>
     </nav>
-    @dd($data)
-    <!-- Header-->
-    <header class="bg-dark position-relative">
-        <div class="container-fluid p-0">
-            <img src="{{$element['image']}}" class="w-100" height="300px">
-            <div class="text-center text-white position-absolute top-50 start-50 translate-middle">
-                <h1 class=" fw-bolder">{{$element['name']}}</h1>
-            </div>
-        </div>
-    </header> 
+    @if ($is_category)
+        @foreach ($categories as $category)
+            <header class="bg-dark position-relative">
+                <div class="container-fluid p-0">
+                    <img src="{{ $category['image'] }}" class="w-100" height="300px">
+                    <div class="text-center text-white position-absolute top-50 start-50 translate-middle">
+                        <h1 class=" fw-bolder">{{ ucfirst($category['slug']) }}</h1>
+                    </div>
+                </div>
+            </header>
+        @endforeach
 
+        <section>
+            <div class="container px-4 px-lg-5 mt-5">
+                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+
+                    @forelse ($data as $product)
+                        <div class="col mb-5">
+                            <div class="card h-100">
+                                <img class="card-img-top"
+                                    src="{{ $product['image'] ?? 'https://imgs.search.brave.com/wfsnB6LU7T8e4MZpxQXhJ_B7mkSwD6VNcxGwYC4vLtE/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly80ZGRp/Zy50ZW5vcnNoYXJl/LmNvbS9pbWFnZXMv/cGhvdG8tcmVjb3Zl/cnkvaW1hZ2VzLW5v/dC1mb3VuZC5qcGc' }}"
+                                    height="200" width="200" alt="..." />
+                                <div class="card-body p-4">
+                                    <div class="text-center">
+                                        <h5 class="fw-bolder">{{ $product['name'] }}</h5>
+                                    </div>
+                                </div>
+                                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                    <div class="btn-group">
+                                        <div class="text-center"><a class="btn btn-outline-dark mt-auto"
+                                                href="/{{ $product['category'] }}/{{ strtolower(str_replace(' ', '-', $product['name'])) }}">View
+                                                options</a></div>
+                                        <div class="text-center"><a class="btn btn-outline-dark mt-auto"
+                                                href="/details/{{ strtolower(str_replace(' ', '-', $product['name'])) }}">Info</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @empty
+                        <p>Nothing to display</p>
+                    @endforelse
+
+                </div>
+            </div>
+        </section>
+    @else
+        @forelse ($data as $product)
+            <div class="container-fluid py-4">
+                <div class="row">
+                    <div class="col text-center">
+                        <h1>{{ ucfirst(str_replace('-', ' ', $product['name'])) }}</h1>
+                        <img src="{{ $product['image'] }}" class="py-2" style="height: 300px; width:auto">
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid py-4">
+                <div class="row align-items-center">
+                    <div class="col-6 offset-3 ">
+                        <form method="POST" action="/richiesta-informazioni">
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+                            @if (session('status'))
+                                <div class="alert alert-success text-center animate__animated animate__fadeOut animate__slower"
+                                    role="alert" style="animation-duration: 10s; ">
+                                    {{ session('status') }}
+                                </div>
+                            @endif
+                            @csrf
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput1" class="form-label">Nome</label>
+                                <input type="name" class="form-control" value="{{ old('name') }}" name="name"
+                                    id="exampleFormControlInput1" placeholder="Mario Rossi" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput1" class="form-label">Email address</label>
+                                <input type="email" class="form-control" value="{{ old('email') }}"
+                                    name="email" id="exampleFormControlInput1" placeholder="name@example.com"
+                                    required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
+                                <textarea class="form-control" name="text" id="exampleFormControlTextarea1" rows="10"
+                                    placeholder="Put your text here" required>{{ old('text') }}</textarea>
+                            </div>
+                            <input type="hidden" name="item" value="{{ $product['name'] }}">
+                            <button class="btn btn-secondary" type="submit">Invia</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        @empty
+        @endforelse
+    @endif
     <!-- Footer-->
     <footer class="py-5 bg-dark">
         <div class="container">
