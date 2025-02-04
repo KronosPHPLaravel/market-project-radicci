@@ -10,7 +10,7 @@ class ProductController extends Controller
 {
     public $products = [
         [
-            'name' => 'iphone-16',
+            'name' => 'Iphone 16',
             'price' => 1469,
             'category' => 'smartphone',
             'image' => 'https://fdn2.gsmarena.com/vv/pics/apple/apple-iphone-16-1.jpg',
@@ -105,7 +105,7 @@ class ProductController extends Controller
     {
         $data = [];
         foreach ($this->products as $product) {
-            if ($product['name'] == $item) {
+            if (strtolower(str_replace(' ', '-', $product['name'])) == $item) {
                 $data[] = $product;
             }
         }
@@ -122,6 +122,7 @@ class ProductController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'text' => $request->text,
+            'item' => $request->item,
         ];
 
         Mail::to($request->input('email'))->send(new ContactSend($mail));

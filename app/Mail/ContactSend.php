@@ -16,6 +16,7 @@ class ContactSend extends Mailable
     /**
      * Create a new message instance.
      */
+    public $data;
     public function __construct($data)
     {
         $this->data = $data;
@@ -26,9 +27,7 @@ class ContactSend extends Mailable
      */
     public function envelope(): Envelope
     {
-        return new Envelope(
-            subject: 'Contact Send',
-        );
+        return new Envelope(subject: 'Contact Send');
     }
 
     /**
@@ -36,9 +35,7 @@ class ContactSend extends Mailable
      */
     public function content(): Content
     {
-        return new Content(
-            view: 'email',
-        );
+        return new Content(view: 'email');
     }
 
     /**
