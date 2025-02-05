@@ -20,7 +20,7 @@
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container px-4 px-lg-5">
-            <img src="logo-1.png">
+            <a class="nav-link active" aria-current="page" href="/"><img src="/logo-1.png"></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
@@ -43,9 +43,10 @@
     <!-- Header-->
     <header class="bg-dark position-relative">
         <div class="container-fluid p-0">
-            <img src="product-back.jpg" class="w-100" height="300px">
+            <img src="https://images.unsplash.com/photo-1458682625221-3a45f8a844c7?q=80&w=2748&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                class="w-100" height="300px">
             <div class="text-center text-white position-absolute top-50 start-50 translate-middle">
-                <h1 class=" fw-bolder">Dove siamo</h1>
+                <h1 class=" fw-bolder" style="text-shadow: 0px 0px 6px #000000;">Dove siamo</h1>
             </div>
         </div>
     </header>

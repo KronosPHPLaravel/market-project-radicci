@@ -11,7 +11,7 @@ class ProductController extends Controller
     public $products = [
         [
             'name' => 'Iphone 16',
-            'price' => 1469,
+            'price' => 1069,
             'category' => 'smartphone',
             'image' => 'https://fdn2.gsmarena.com/vv/pics/apple/apple-iphone-16-1.jpg',
         ],
@@ -22,15 +22,16 @@ class ProductController extends Controller
             'image' => 'https://imgs.search.brave.com/Pg1kvl17fAyhubn5Jfk6kmrqCz1TpdB1uaWqkeVbabg/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL0kv/NTFMMHNFYVJlYUwu/anBn',
         ],
         [
-            'name' => 'iphone 15',
-            'price' => 1269,
+            'name' => 'iphone 15 Pro Max',
+            'price' => 1469,
             'category' => 'smartphone',
-            'image' => 'https://imgs.search.brave.com/FyoZ9ku52ucjpTC874xe6fFGCRptP8H2E23JAsiyRwU/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL0kv/NTFQdEZIVVBqQkwu/anBn',
+            'image' => 'https://imgs.search.brave.com/JxubO_ZuhQBHn3rlwEEygvLJs9xdtZfNaUl8xme7Kt4/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9mZG4y/LmdzbWFyZW5hLmNv/bS92di9waWNzL2Fw/cGxlL2FwcGxlLWlw/aG9uZS0xNS1wcm8t/bWF4LTEuanBn',
         ],
         [
-            'name' => 'iPad mini',
-            'price' => 999,
-            'category' => 'laptop-tablet',
+            'name' => 'MagSafe Cover iPhone 16 Pro Max',
+            'price' => 35,
+            'image' => 'https://imgs.search.brave.com/WH_1h1p6I3ekGeX1Aod1TCMOwV1IRMjAdoUEQPDs2Ng/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/ZWxhZ28uY29tL2Nk/bi9zaG9wL2ZpbGVz/L1MxNk1TTEU2M1BS/Ty1CSy5qcGc_Y3Jv/cD1jZW50ZXImaGVp/Z2h0PTMwMDAmdj0x/NzI0MzY1ODI5Jndp/ZHRoPTMwMDA',
+            'category' => 'accessori-smartphone',
         ],
         [
             'name' => 'iphone 15 pro',
@@ -71,7 +72,15 @@ class ProductController extends Controller
     ];
     public function Welcome()
     {
-        return view('welcome');
+        $slugProd = [];
+        $data = [];
+        foreach ($this->products as $product) {
+            if (!array_key_exists($product['category'], $slugProd)) {
+                $slugProd[$product['category']] = $product;
+                $data[] = $product;
+            }
+        }
+        return view('welcome', ['data' => $data]);
     }
 
     public function Category()
