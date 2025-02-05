@@ -6,7 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Shop Homepage - Start Bootstrap Template</title>
+    @if ($is_category)
+        <title>Prodotti</title>
+    @else
+        @forelse ($data as $product)
+            <title>{{ $product['name'] }}</title>
+        @empty
+        @endforelse
+    @endif
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <!-- Bootstrap icons-->
