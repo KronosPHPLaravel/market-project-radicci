@@ -47,8 +47,6 @@
                 class="w-100" height="300px">
             <div class="text-center text-white position-absolute top-50 start-50 translate-middle">
                 <h1 class="display-4 fw-bolder" style="text-shadow: 0px 0px 6px #000000;">RMC Marketplace</h1>
-                <p class="lead fw-normal text-white-50 mb-0" style="text-shadow: 0px 0px 6px #000000;">Technologic
-                    Empire</p>
             </div>
         </div>
     </header>
@@ -73,11 +71,11 @@
                         <div class="text-center">
                             <p>€ {{ $product['price'] }}</p>
                         </div>
-                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                        <div class="card-footer text-center py-3 border-top-0 bg-transparent">
                             <div class="btn-group">
                                 <div class="text-center"><a class="btn btn-outline-dark mt-auto"
-                                        href="/{{ $product['category'] }}/{{ strtolower(str_replace(' ', '-', $product['name'])) }}">View
-                                        options</a></div>
+                                        href="/{{ $product['category'] }}/{{ strtolower(str_replace(' ', '-', $product['name'])) }}">View</a>
+                                </div>
                             </div>
                         </div>
                     </div>
