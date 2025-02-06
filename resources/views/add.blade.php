@@ -50,31 +50,44 @@
             </div>
         </div>
     </header>
-    <div class="container">
-        <a href="/add"> <img src="add.png" height="70px" class="py-3"></a>
-    </div>
     <section>
         <div class="container px-4 px-lg-5 mt-5">
             <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-                @foreach ($products as $product)
-                    <div class="col mb-5">
-                        <div class="card h-100">
-                            <img class="card-img-top" src="{{ $product['image'] }}" height="200" width="200"
-                                alt="..." />
-                            <div class="card-body p-4">
-                                <div class="text-center">
-                                    <h5 class="fw-bolder">{{ $product['name'] }}</h5>
-                                </div>
+                <div class="col mb-5">
+                    <form method="POST" action="/add">
+                        @if (session('status'))
+                            <div class="alert alert-success text-center animate__animated animate__fadeOut animate__slower"
+                                role="alert" style="animation-duration: 10s; ">
+                                {{ session('status') }}
                             </div>
-                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto"
-                                        href="/details/{{ $product['slug'] }}">Entra</a></div>
-                            </div>
+                        @endif
+                        @csrf
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Nome Articolo</label>
+                            <input type="name" class="form-control" value="{{ old('name') }}" name="name"
+                                id="exampleFormControlInput1" placeholder="iPhone 16" required>
                         </div>
-                    </div>
-                @endforeach
+                        <div class="mb-3">
+                            <label for="exampleFormControlTextarea1" class="form-label">Prezzo</label>
+                            <textarea class="form-control" name="price" id="exampleFormControlTextarea1" placeholder="9,99" required>{{ old('text') }}</textarea>
+                        </div>
+                        <input type="hidden" name="item" value="name">
+                        <div class="py-3 text-center">
+                            <button class="btn btn-secondary" type="submit">Salva</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
+        <hr>
+        <div class="container justify-content-center">
+            <ul>
+                @foreach ($products as $product)
+                    <li>
+                        <p>{{ $product->name }}: €{{ $product->price }}</p>
+                    </li>
+                @endforeach
+            </ul>
     </section>
     <!-- Footer-->
     <footer class="py-5 bg-dark">
