@@ -68,6 +68,11 @@
                                 id="exampleFormControlInput1" placeholder="iPhone 16" required>
                         </div>
                         <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">URL/Nome Immagine</label>
+                            <x-image :image={{ $image ?? '' }} />
+                            <input type="name" class="form-control" name="image" id="exampleFormControlInput1">
+                        </div>
+                        <div class="mb-3">
                             <label for="exampleFormControlTextarea1" class="form-label">Prezzo</label>
                             <textarea class="form-control" name="price" id="exampleFormControlTextarea1" placeholder="9,99" required>{{ old('text') }}</textarea>
                         </div>
@@ -84,7 +89,7 @@
             <ul>
                 @foreach ($products as $product)
                     <li>
-                        <p>{{ $product->name }}: €{{ $product->price }}</p>
+                        <p>{{ $product->name }}: €{{ $product->price }}{{ $product->image }}</p>
                     </li>
                 @endforeach
             </ul>

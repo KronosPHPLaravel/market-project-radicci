@@ -18,6 +18,7 @@ class AddProduct extends Controller
         Product::create([
             'name' => $request->name,
             'price' => $request->price,
+            'image' => $request->image,
         ]);
         return redirect('add');
     }
